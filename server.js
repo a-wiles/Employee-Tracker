@@ -59,12 +59,15 @@ console.log("Add Department")
             name:"department"
         }
     ]).then(function (answer) {
+        connection.query('INSERT INTO department')
+        //insert department name
+
+        startMenu();
     })
 };
-//add department name
 
 function addRole () {;
-console.log("Add Roll")
+console.log("Add Role")
     Inquirer.prompt([
         {
             type:"input",
@@ -72,9 +75,13 @@ console.log("Add Roll")
             name:"role"
         }
     ]).then(function (answer) {
+        connection.query('INSERT INTO role')
+        //name of role, salary, department
+
+        startMenu();
     })
 };
-// name of role, salary & department
+
 
 function addEmployee () {;
 console.log("Add Employee")
@@ -85,9 +92,12 @@ console.log("Add Employee")
             name:"employee"
         }
     ]).then(function (answer) {
+        connection.query('INSERT INTO employee')
+        //first, last, role, manager
+
+        startMenu();
     })
 };
-//add employee first, last, role, manager
 
 function updateEmployee () {};
 // prompted to select employee to update + new role
