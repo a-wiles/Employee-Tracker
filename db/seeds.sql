@@ -22,3 +22,9 @@ VALUES
 ('Rebecca', 'Randolph', 4, 8),
 ('Henry', 'Chancler', 4, 8),
 ('Jinyoung', 'Kim', 4, NULL),
+
+
+SELECT employee.role_id, role.department_id, department
+FROM employee
+LEFT JOIN department ON role.department_id ON employee.role_id = department.department_id.role_id
+ORDER BY employee.id ;
