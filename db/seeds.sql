@@ -1,16 +1,19 @@
-INSERT INTO department (name)
-VALUES
-('Marketing'),
-('IT'),
-('Finances'),
-('Operations'),
+USE employees;
+
+-- INSERT INTO department (name)
+-- VALUES
+-- ('Marketing'),
+-- ('IT'),
+-- ('Finances'),
+-- ('Operations');
 
 INSERT INTO role (title, salary, department_id)
-('Marketing' 70000, 1),
-('IT Consultant', 90000, 2),
-('Payroll' 60000, 3),
-('Project Manager', 60000, 4),
-('Cashier', 45000, 4),
+VALUES
+('Marketing', 7000, 1),
+('IT Consultant', 9000, 2),
+('Payroll', 6000, 3),
+('Project Manager', 6000, 4),
+('Cashier', 4500, 4);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
@@ -21,6 +24,6 @@ VALUES
 ('Milo', 'Synder', 4, 8),
 ('Rebecca', 'Randolph', 4, 8),
 ('Henry', 'Chancler', 4, 8),
-('Jinyoung', 'Kim', 4, NULL),
+('Jinyoung', 'Kim', 4, NULL);
 
 
