@@ -9,8 +9,8 @@ CREATE TABLE employee (
     role_id INTEGER,
     manager_id INTEGER NULL,
     ON DELETE SET NULL,
-    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id)
-    
+    CONSTRAINT FK_role FOREIGN KEY (role_id) REFERENCES role(id),
+    PRIMARY KEY(employee_id)
 );
 
 CREATE TABLE department (
@@ -24,5 +24,6 @@ CREATE TABLE role (
     salary DECIMAL,
     department_id INTEGER
     ON DELETE SET NULL,
-    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id)
+    CONSTRAINT FK_department FOREIGN KEY (department_id) REFERENCES department(id)
+    PRIMARY KEY(role_id)
 )
