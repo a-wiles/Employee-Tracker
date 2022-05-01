@@ -55,20 +55,38 @@ console.log("Add Department")
     Inquirer.prompt([
         {
             type:"input",
-            message:"Enter Department: ",
+            message:"Enter New Department: ",
             name:"department"
         }
-    ]).then(userresponse => {
-        const newDepartment = new Department(userresponse.name);
-        startMenu()
+    ]).then(function (answer) {
     })
 };
 //add department name
 
-function addRole () {};
+function addRole () {;
+console.log("Add Roll")
+    Inquirer.prompt([
+        {
+            type:"input",
+            message:"Enter New Role: ",
+            name:"role"
+        }
+    ]).then(function (answer) {
+    })
+};
 // name of role, salary & department
 
-function addEmployee () {};
+function addEmployee () {;
+console.log("Add Employee")
+    Inquirer.prompt([
+        {
+            type:"input",
+            message:"Enter New Employee: ",
+            name:"employee"
+        }
+    ]).then(function (answer) {
+    })
+};
 //add employee first, last, role, manager
 
 function updateEmployee () {};
