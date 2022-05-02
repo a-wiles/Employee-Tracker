@@ -26,7 +26,7 @@ const startMenu = function () {
             viewAll();
         } else if (choices === "View all departments") {
             viewDepartments();
-        } else if (choices === "View All Employees") {
+        } else if (choices === "View all employees") {
             viewAllEmployees();
         } else if (choices === "View all roles") {
             viewAllRoles();
@@ -68,16 +68,15 @@ function viewAllRoles() {
         startMenu()
     })
 };
-// fiew all Job titles, role id, department id and salary
 
 function viewAllEmployees() {
-    db.query("SELECT * FROM EMPLOYEE ORDER BY LAST_NAME;", function (err, data) {
+    console.log(viewAllEmployees);
+    db.query("SELECT * FROM EMPLOYEE ORDER BY ID;", function (err, data) {
         if (err) throw err;
         console.table(data)
         startMenu()
     })
-}
-// employee data, employee id, first name, last name, job titles, departments, salaries and managers
+};
 
 function addDepartment() {
     console.log("Add Department")
@@ -88,37 +87,78 @@ function addDepartment() {
             name: "department"
         }
     ]).then(function (answer) {
-        db.query('INSERT INTO department')
-        //insert department name
+        db.query('INSERT INTO department (name) VALUES (?);',
+            answer.department, function (err, data) {
+                if (err) throw err;
+                console.table(data)
+                startMenu()
 
-        startMenu();
+            })
     })
 };
 
 function addRole() {
     console.log("Add Role")
-    Inquirer.prompt([
-        {
-            type: "input",
-            message: "Enter New Role: ",
-            name: "role"
+    var roleSql = 'SELECT * FROM department;'
+    db.query(roleSql, function (err, res) {
+        if (err) throw err;
+        var rolesAdding = [];
+        for (let i = 0; i < res.length; i++) {
+            const roleAdding = { name: res[i].name, value: res[i].id }
+            rolesAdding.push(roleAdding);
         }
-    ]).then(function (answer) {
-        connection.query('INSERT INTO role')
-        //name of role, salary, department
+        const rolequestions = [
+            {
+                type: "input",
+                message: "Enter New Role Title: ",
+                name: "title"
+            },
+            {
+                type: "input",
+                message: "Enter New Role's Salary: ",
+                name: "salary"
+            },
+            {
+                type: "list",
+                message: "Please select a Department for the role",
+                name: "department_id",
+                choices: rolesAdding
+            },
+        ]
 
-        startMenu();
+        inquirer.prompt(rolequestions).then(function (answer) {
+            db.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?);',
+                [answer.title, answer.salary, answer.department_id], function (err, data) {
+                    if (err) throw err;
+                    console.table("Role has been added!")
+                    startMenu()
+                })
+        })
     })
 };
-
 
 function addEmployee() {
     console.log("Add Employee")
     Inquirer.prompt([
         {
             type: "input",
-            message: "Enter New Employee: ",
-            name: "employee"
+            message: "Enter New Employees First Name: ",
+            name: "first_name"
+        },
+        {
+            type: "input",
+            message: "Enter New Employees Last Name: ",
+            name: "last_name"
+        },
+        {
+            type: 'list',
+            name: 'choices',
+            message: 'Please choose a roll',
+        },
+        {
+            type: "input",
+            message: "Enter New Role: ",
+            name: "manager_id",
         }
     ]).then(function (answer) {
         connection.query('INSERT INTO employee')
@@ -131,4 +171,4 @@ function addEmployee() {
 function updateEmployee() { }
 
 
-startMenu()
+startMenu();

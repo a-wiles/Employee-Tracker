@@ -1,11 +1,11 @@
 USE employees;
 
--- INSERT INTO department (name)
--- VALUES
--- ('Marketing'),
--- ('IT'),
--- ('Finances'),
--- ('Operations');
+INSERT INTO department (name)
+VALUES
+('Marketing'),
+('IT'),
+('Finances'),
+('Operations');
 
 INSERT INTO role (title, salary, department_id)
 VALUES
