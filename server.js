@@ -227,8 +227,8 @@ function updateEmployee() {
                 }
             ]
             inquirer.prompt(updatequestions).then(function (answer) {
-                db.query(`UPDATE employee (role_id) VALUES (?); WHERE VALUES (?);`,
-                    [answer.employee, answer.role], function (err, data) {
+                db.query(`UPDATE employee SET role_id VALUES (?); WHERE VALUES (?);`,
+                    [answer.chosenrole, answer.chosenemployee], function (err, data) {
                         if (err) throw err;
                         console.table("Role has been adjusted!")
                         startMenu()
