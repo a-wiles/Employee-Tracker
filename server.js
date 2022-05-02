@@ -192,7 +192,26 @@ function addEmployee() {
     })
 };
 
-function updateEmployee() { }
+function updateEmployee() {
+    console.log("Updating Employee")
+    var empSql = 'SELECT * FROM employee;';
+    db.query(empSql, function (err, res) {
+        if (err) throw err;
+        var addingEmps = [];
+        for (let i = 0; i < res.length; i++) {
+            const addingEmp = { name: `${res[i].first_name} ${res[i].last_name}`, value: res[i].id }
+            addingEmps.push(addingEmp);
+        }
+
+        var roleSql = 'SELECT * FROM role;'
+        db.query(roleSql, function (err, res) {
+            if (err) throw err;
+            var rolesAdding = [];
+            for (let i = 0; i < res.length; i++) {
+                const roleAdding = { name: res[i].title, value: res[i].id }
+                rolesAdding.push(roleAdding);
+            }
+}
 
 
 startMenu();
