@@ -98,8 +98,8 @@ function addDepartment() {
 
 function addRole() {
     console.log("Add Role")
-    var roleSql = 'SELECT * FROM department;'
-    db.query(roleSql, function (err, res) {
+    var role = 'SELECT * FROM department;'
+    db.query(role, function (err, res) {
         if (err) throw err;
         var rolesAdding = [];
         for (let i = 0; i < res.length; i++) {
@@ -138,8 +138,8 @@ function addRole() {
 
 function addEmployee() {
     console.log("Add Employee")
-    var empSql = 'SELECT * FROM employee;';
-    db.query(empSql, function (err, res) {
+    var employeeselect = 'SELECT * FROM employee;';
+    db.query(employeeselect, function (err, res) {
         if (err) throw err;
         var addingEmps = [];
         for (let i = 0; i < res.length; i++) {
@@ -194,8 +194,8 @@ function addEmployee() {
 
 function updateEmployee() {
     console.log("Updating Employee")
-    var empSql = 'SELECT * FROM employee;';
-    db.query(empSql, function (err, res) {
+    var employeeselect = 'SELECT * FROM employee;';
+    db.query(employeeselect, function (err, res) {
         if (err) throw err;
         var addingEmps = [];
         for (let i = 0; i < res.length; i++) {
@@ -203,8 +203,8 @@ function updateEmployee() {
             addingEmps.push(addingEmp);
         }
 
-        var roleSql = 'SELECT * FROM role;'
-        db.query(roleSql, function (err, res) {
+        var roleselect = 'SELECT * FROM role;'
+        db.query(roleselect, function (err, res) {
             if (err) throw err;
             var rolesAdding = [];
             for (let i = 0; i < res.length; i++) {
