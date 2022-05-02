@@ -1,4 +1,4 @@
-// const Sequelize = require('sequelize');
+//Requires for ENV and mysql connection
 require('dotenv').config();
 const mysql = require("mysql2")
 const connection = mysql.createConnection({
@@ -8,18 +8,9 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME
 })
 
-
-// create connection to our env
-// const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
-//   host: 'localhost',
-//   dialect: 'mysql',
-//   port: 3001
-// });
-
 connection.connect(function(err){
     if (err) throw err;
     console.log("Welcome to Employee tracker")
-    // startMenu();
 })
 
 module.exports = connection;

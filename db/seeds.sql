@@ -1,5 +1,7 @@
+/*using the database from connection*/
 USE employees;
 
+/*Information into department*/
 INSERT INTO department (name)
 VALUES
 ('Marketing'),
@@ -7,6 +9,7 @@ VALUES
 ('Finances'),
 ('Operations');
 
+/*Information for roles*/
 INSERT INTO role (title, salary, department_id)
 VALUES
 ('Marketing', 7000, 1),
@@ -15,6 +18,7 @@ VALUES
 ('Project Manager', 6000, 4),
 ('Cashier', 4500, 4);
 
+/*Information for employees*/
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
 ('Dan', 'Fletcher', 1, 8),
