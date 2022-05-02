@@ -36,7 +36,7 @@ const startMenu = function () {
             addRole();
         } else if (choices === "Add an employee") {
             addEmployee();
-        } else if (choices === "Update an employee role") {
+        } else if (choices === "Update an employees role") {
             updateEmployee();
         } else if (choices === "Exit") {
             process.exit(0)
