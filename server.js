@@ -211,7 +211,31 @@ function updateEmployee() {
                 const roleAdding = { name: res[i].title, value: res[i].id }
                 rolesAdding.push(roleAdding);
             }
-}
 
+            const updatequestions = [
+                {
+                    type: "list",
+                    message: "Which employee would you like to adjust their role?",
+                    name: "chosenemployee",
+                    choices: addingEmps
+                },
+                {
+                    type: "list",
+                    message: "What role should they be reassigned?",
+                    name: "chosenrole",
+                    choices: rolesAdding
+                }
+            ]
+            inquirer.prompt(updatequestions).then(function (answer) {
+                db.query(`UPDATE employee (role_id) VALUES (?); WHERE VALUES (?);`,
+                    [answer.employee, answer.role], function (err, data) {
+                        if (err) throw err;
+                        console.table("Role has been adjusted!")
+                        startMenu()
+                    })
+            })
+        })
+    })
+};
 
 startMenu();
