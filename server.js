@@ -39,7 +39,6 @@ const startMenu = function () {
         } else if (choices === "Update an employee role") {
             updateEmployee();
         } else if (choices === "Exit") {
-            connection.end();
             process.exit(0)
         };
     });
@@ -80,7 +79,7 @@ function viewAllEmployees() {
 
 function addDepartment() {
     console.log("Add Department")
-    Inquirer.prompt([
+    inquirer.prompt([
         {
             type: "input",
             message: "Enter New Department: ",
@@ -90,7 +89,7 @@ function addDepartment() {
         db.query('INSERT INTO department (name) VALUES (?);',
             answer.department, function (err, data) {
                 if (err) throw err;
-                console.table(data)
+                console.table("Department was added")
                 startMenu()
 
             })
