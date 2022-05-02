@@ -21,7 +21,7 @@ const startMenu = function () {
         }
     ]).then((answers) => {
         var { choices } = answers;
-    
+
         if (choices === "View All") {
             viewAll();
         } else if (choices === "View all departments") {
@@ -71,7 +71,7 @@ function viewAllRoles() {
 
 function viewAllEmployees() {
     console.log(viewAllEmployees);
-    db.query("SELECT * FROM EMPLOYEE ORDER BY ID;", function (err, data) {
+    db.query("SELECT * FROM employee ORDER BY id;", function (err, data) {
         if (err) throw err;
         console.table(data)
         startMenu()
@@ -139,32 +139,57 @@ function addRole() {
 
 function addEmployee() {
     console.log("Add Employee")
-    Inquirer.prompt([
-        {
-            type: "input",
-            message: "Enter New Employees First Name: ",
-            name: "first_name"
-        },
-        {
-            type: "input",
-            message: "Enter New Employees Last Name: ",
-            name: "last_name"
-        },
-        {
-            type: 'list',
-            name: 'choices',
-            message: 'Please choose a roll',
-        },
-        {
-            type: "input",
-            message: "Enter New Role: ",
-            name: "manager_id",
+    var empSql = 'SELECT * FROM employee;';
+    db.query(empSql, function (err, res) {
+        if (err) throw err;
+        var addingEmps = [];
+        for (let i = 0; i < res.length; i++) {
+            const addingEmp = { name: `${res[i].first_name} ${res[i].last_name}`, value: res[i].id }
+            addingEmps.push(addingEmp);
         }
-    ]).then(function (answer) {
-        connection.query('INSERT INTO employee')
-        //first, last, role, manager
 
-        startMenu();
+        var roleSql = 'SELECT * FROM role;'
+        db.query(roleSql, function (err, res) {
+            if (err) throw err;
+            var rolesAdding = [];
+            for (let i = 0; i < res.length; i++) {
+                const roleAdding = { name: res[i].title, value: res[i].id }
+                rolesAdding.push(roleAdding);
+            }
+            const employeequestion = [
+                {
+                    type: "input",
+                    message: "Enter New Employees First Name: ",
+                    name: "first_name"
+                },
+                {
+                    type: "input",
+                    message: "Enter New Employees Last Name: ",
+                    name: "last_name"
+                },
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: 'Please choose a Role',
+                    choices: rolesAdding
+                },
+                {
+                    type: "list",
+                    message: "Enter Manager",
+                    name: "manager",
+                    choices: addingEmps
+                },
+            ]
+
+            inquirer.prompt(employeequestion).then(function (answer) {
+                db.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?);',
+                    [answer.first_name, answer.last_name, answer.role, answer.manager], function (err, data) {
+                        if (err) throw err;
+                        console.table("New Employee has been added!")
+                        startMenu()
+                    })
+            })
+        })
     })
 };
 
